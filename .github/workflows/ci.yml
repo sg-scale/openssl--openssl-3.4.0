@@ -32,7 +32,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get -yq --no-install-suggests --no-install-recommends --force-yes install unifdef
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0
     - name: config
@@ -47,7 +47,7 @@ jobs:
   check_docs:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: config
       run: ./config --banner=Configured --strict-warnings enable-fips && perl configdata.pm --dump
     - name: make build_generated
@@ -67,7 +67,7 @@ jobs:
   check-ansi:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: config
       run: CPPFLAGS='-ansi -D_XOPEN_SOURCE=1 -D_POSIX_C_SOURCE=200809L' ./config --banner=Configured no-asm no-secure-memory no-makedepend enable-buildtest-c++ enable-fips --strict-warnings && perl configdata.pm --dump
     - name: make
@@ -76,7 +76,7 @@ jobs:
   basic_gcc:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: localegen
@@ -107,7 +107,7 @@ jobs:
   basic_clang:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
@@ -134,7 +134,7 @@ jobs:
     runs-on: ${{ matrix.os }}-self-hosted
     continue-on-error: true
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: config
       run: ./config enable-demos enable-fips enable-ec_nistp_64_gcc_128 enable-md2 enable-rc5 enable-ssl3 enable-ssl3-method enable-trace
     - name: config dump
@@ -154,7 +154,7 @@ jobs:
   minimal:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
@@ -176,7 +176,7 @@ jobs:
   no-deprecated:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
@@ -198,7 +198,7 @@ jobs:
   no-shared-ubuntu:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
@@ -225,7 +225,7 @@ jobs:
     if: github.server_url == 'https://github.com'
     runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
@@ -247,7 +247,7 @@ jobs:
   non-caching:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
@@ -273,7 +273,7 @@ jobs:
   address_ub_sanitizer:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
@@ -299,7 +299,7 @@ jobs:
   fuzz_tests:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
@@ -326,7 +326,7 @@ jobs:
   memory_sanitizer:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
@@ -353,7 +353,7 @@ jobs:
   threads_sanitizer:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: Adjust ASLR for sanitizer
@@ -379,7 +379,7 @@ jobs:
   enable_non-default_options:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: modprobe tls
@@ -403,7 +403,7 @@ jobs:
   full_featured:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: modprobe tls
@@ -433,7 +433,7 @@ jobs:
   no-legacy:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
@@ -455,7 +455,7 @@ jobs:
   legacy:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
     - name: checkout fuzz/corpora submodule
       run: git submodule update --init --depth 1 fuzz/corpora
     - name: config
@@ -482,7 +482,7 @@ jobs:
   out-of-readonly-source-and-install-ubuntu:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         path: ./source
     - name: checkout fuzz/corpora submodule
@@ -527,7 +527,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     if: github.server_url == 'https://github.com'
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         path: ./source
     - name: checkout fuzz/corpora submodule
@@ -567,7 +567,7 @@ jobs:
   external-tests:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: package installs
@@ -611,7 +611,7 @@ jobs:
         PYTHON:
           - 3.9
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: Configure OpenSSL
@@ -635,7 +635,7 @@ jobs:
   external-test-cf-quiche:
     runs-on: ${{ github.server_url == 'https://github.com' && 'ubuntu-latest' || 'ubuntu-22.04-self-hosted' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         submodules: recursive
     - name: Configure OpenSSL
